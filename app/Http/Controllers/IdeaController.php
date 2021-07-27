@@ -34,6 +34,6 @@ class IdeaController extends Controller
 
     public function winUsers()
     {
-        \Artisan::call('tournament:start');
+        \Artisan::call('schedule:work');
     }
 }
