@@ -54,11 +54,11 @@ class IdeaController extends Controller
                 'winner_name' => $idea->name,
                 'winner_message' => $ideas_a->count() == 1?'Congratulations!! You are the winner of the tournament':'Congratulations!! you have won and you are in top '.$ideas_a->count()
             ];
-            // \Mail::send('winner_email', $data, function($message) use ($to_name, $to_email, $from_email) {
-            //     $message->to($to_email, $to_name)
-            //     ->subject('Tournament info');
-            //     $message->from($from_email,'Tournament Reminder');
-            //     });
+            \Mail::send('winner_email', $data, function($message) use ($to_name, $to_email, $from_email) {
+                $message->to($to_email, $to_name)
+                ->subject('Tournament info');
+                $message->from($from_email,'Tournament Reminder');
+                });
         }
         $fail_users = Idea::whereNotIn('id', $ids)->where('in_tournament', 'yes')->get();
         foreach($fail_users as $user)
